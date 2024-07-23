@@ -3,6 +3,8 @@ require "test_helper"
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:one)
+    #puts JSON.pretty_generate(@product.as_json)
+    @product.title = "The Great Book #{rand(1000)}"
   end
 
   test "should get index" do
