@@ -3,7 +3,7 @@ require "test_helper"
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product = products(:one)
-    #puts JSON.pretty_generate(@product.as_json)
+    # puts JSON.pretty_generate(@product.as_json)
     @product.title = "The Great Book #{rand(1000)}"
   end
 
@@ -40,6 +40,14 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to product_url(@product)
   end
 
+  test "can't delete product in cart" do
+    assert_raises(ActiveRecord::RecordNotDestroyed) do
+      delete product_url(products(:two))
+    end
+    assert Product.exists?(products(:two).id)
+    # assert_redirected_to products_url
+  end
+
   test "should destroy product" do
     assert_difference("Product.count", -1) do
       delete product_url(@product)
@@ -47,4 +55,5 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to products_url
   end
+
 end
