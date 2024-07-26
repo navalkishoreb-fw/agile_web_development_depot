@@ -7,6 +7,9 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 #gem "rails", "5.2.7.1"
 #gem "railties", "5.2.7.1"
 
+# For background jobs
+gem 'sidekiq'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 

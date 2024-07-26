@@ -1,47 +1,53 @@
 require "application_system_test_case"
 
 class OrdersTest < ApplicationSystemTestCase
-  setup do
-    @order = orders(:one)
-  end
+  include ActiveJob::TestHelper
 
-  test "visiting the index" do
-    visit orders_url
-    assert_selector "h1", text: "Orders"
-  end
+  test "check routing number" do
 
-  test "should create order" do
-    visit orders_url
-    click_on "New order"
+    LineItem.delete_all
+    Order.delete_all
 
-    fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
-    fill_in "Name", with: @order.name
-    fill_in "Pay type", with: @order.pay_type
-    click_on "Create Order"
+    visit store_index_url
 
-    assert_text "Order was successfully created"
-    click_on "Back"
-  end
+    # visit store_index_url
 
-  test "should update Order" do
-    visit order_url(@order)
-    click_on "Edit this order", match: :first
+    first('.catalog li').click_on 'Add to Cart'
 
-    fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
-    fill_in "Name", with: @order.name
-    fill_in "Pay type", with: @order.pay_type
-    click_on "Update Order"
+    click_on 'Checkout'
 
-    assert_text "Order was successfully updated"
-    click_on "Back"
-  end
+    fill_in 'order_name', with: 'Dave Thomas'
+    fill_in 'order_address', with: '123 Main Street'
+    fill_in 'order_email', with: 'dave@example.com'
 
-  test "should destroy Order" do
-    visit order_url(@order)
-    click_on "Destroy this order", match: :first
+    # assert_no_selector "#order_routing_number"
 
-    assert_text "Order was successfully destroyed"
+    select 'Check', from: 'order_pay_type'
+
+    # assert_selector "#order_routing_number"
+
+    # fill_in "Routing #", with: "123456"
+    # fill_in "Account #", with: "987654"
+
+    perform_enqueued_jobs do
+      click_button "Place Order"
+    end
+
+    orders = Order.all
+    assert_equal 1, orders.size
+
+    order = orders.first
+
+    assert_equal "Dave Thomas", order.name
+    assert_equal "123 Main Street", order.address
+    assert_equal "dave@example.com", order.email
+    assert_equal "Check", order.pay_type
+    assert_equal 1, order.line_items.size
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ["dave@example.com"], mail.to
+    assert_equal 'Sam Ruby <depot@example.com>', mail[:from].value
+    assert_equal "Pragmatic Store Order Confirmation", mail.subject
+
   end
 end
