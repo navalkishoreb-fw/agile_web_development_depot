@@ -1,4 +1,5 @@
 es:
+  thanks:          "Gracias por su pedido"
   number:
     currency:
       format:
@@ -7,6 +8,25 @@ es:
         separator: ","
         delimiter: "."
         format: "%n&nbsp;%u"
+  activerecord:
+    models:
+      order: "pedido"
+    attributes:
+      order:
+        address: "Direcci&oacute;n"
+        name: "Nombre"
+        email: "E-mail"
+        pay_type: "Forma de pago"
+    errors:
+      messages:
+        inclusion: "no est&aacute; incluido en la lista"
+        blank: "no puede quedar en blanco"
+  errors:
+    template:
+      body: "Hay problemas con los siguientes campos:"
+      header:
+        one: "1 error ha impedido que este %{model} se guarde"
+        other: "%{count} errores han impedido que este %{model} se guarde"
 
   layouts:
     application:
@@ -27,3 +47,19 @@ es:
       title: "Carrito de la Compra"
       empty: "Vaciar Carrito"
       checkout: "Comprar"
+
+
+  orders:
+    new:
+      legend: "Por favor, introduzca sus datos"
+    form:
+      name: "Nombre"
+      address_html: "Direcci&oacute;n"
+      email: "E-mail"
+      pay_type: "Forma de pago"
+      pay_prompt_html: "Seleccione un método de pago"
+      submit: "Realizar Pedido"
+      pay_types:
+        check: "Cheque"
+        credit_card: "Tarjeta de Crédito"
+        purchase_order: "Orden de Compra"
