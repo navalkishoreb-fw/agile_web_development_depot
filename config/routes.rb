@@ -1,6 +1,14 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'admin', to: 'admin#index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
   resources :users
 
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
