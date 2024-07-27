@@ -1,27 +1,31 @@
-<div id="<%= dom_id order %>">
-  <p>
-    <strong>Name:</strong>
-    <%= order.name %>
-  </p>
+<div id="<%= dom_id(order) %>" class="card my-3">
+  <div class="card-header">
+    <h2>Order Details</h2>
+  </div>
+  <div class="card-body">
+    <p class="mb-2">
+      <strong>Name:</strong>
+      <%= order.name %>
+    </p>
 
-  <p>
-    <strong>Address:</strong>
-    <%= order.address %>
-  </p>
+    <p class="mb-2">
+      <strong>Address:</strong>
+      <%= order.address %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= order.email %>
-  </p>
+    <p class="mb-2">
+      <strong>Email:</strong>
+      <%= order.email %>
+    </p>
 
-  <p>
-    <strong>Pay type:</strong>
-    <%= order.pay_type %>
-  </p>
+    <p class="mb-2">
+      <strong>Pay Type:</strong>
+      <%= order.pay_type %>
+    </p>
 
-  <p>
-    <strong>Order Status:</strong>
-    <%= order.order_status.present? ? order.order_status.status : 'No status available' %>
-  </p>
-
+    <p class="mb-2">
+      <strong>Order Status:</strong>
+      <%= order.order_status.present? ? order.order_status.status.capitalize : 'No status available' %>
+    </p>
+  </div>
 </div>
