@@ -19,4 +19,9 @@
     <%= order.pay_type %>
   </p>
 
+  <p>
+    <strong>Order Status:</strong>
+    <%= order.order_status.present? ? order.order_status.status : 'No status available' %>
+  </p>
+
 </div>

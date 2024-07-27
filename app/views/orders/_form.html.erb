@@ -6,7 +6,7 @@
       <p><%= t('errors.template.body') %></p>
       <ul>
         <% order.errors.full_messages.each do |message| %>
-          <li><%=raw message %></li>
+          <li><%= raw message %></li>
         <% end %>
       </ul>
     </div>
@@ -32,6 +32,14 @@
     <%= form.select :pay_type, Order.pay_types.keys, id: :order_pay_type,
                     prompt: t(".pay_prompt_html") %>
   </div>
+
+  <%= form.fields_for :order_status do |status_fields| %>
+    <%= status_fields.hidden_field :id %> <!-- Include the ID hidden field for existing records -->
+    <div class="field">
+      <%= status_fields.label :status, 'Order Status' %>
+      <%= status_fields.select :status, OrderStatus.statuses.keys.map { |s| [s.titleize, s] }, id: :order_status_type %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit t('.submit') %>
