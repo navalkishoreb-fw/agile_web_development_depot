@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_26_033737) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_27_034018) do
   create_table "carts", charset: "utf8mb3", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,6 +28,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_033737) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
+  create_table "order_statuses", charset: "utf8mb3", force: :cascade do |t|
+    t.string "status"
+    t.bigint "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_statuses_on_order_id"
+  end
+
   create_table "orders", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.text "address"
@@ -35,6 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_033737) do
     t.integer "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_status_id"
+    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
   create_table "products", charset: "utf8mb3", force: :cascade do |t|
@@ -56,4 +66,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_033737) do
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
+  add_foreign_key "order_statuses", "orders"
+  add_foreign_key "orders", "order_statuses"
 end
