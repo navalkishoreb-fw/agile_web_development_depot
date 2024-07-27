@@ -10,6 +10,9 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 # For background jobs
 gem 'sidekiq'
 
+# For locale selector
+gem 'turbolinks', '~> 5.2.0'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
