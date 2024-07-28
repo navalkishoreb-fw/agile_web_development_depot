@@ -1,31 +1,19 @@
-<div id="<%= dom_id(order) %>" class="card my-3">
-  <div class="card-header">
-    <h2>Order Details</h2>
-  </div>
+<div id="<%= dom_id(order) %>" class="card mb-3">
   <div class="card-body">
-    <p class="mb-2">
-      <strong>Name:</strong>
-      <%= order.name %>
-    </p>
+    <p class="card-title"><strong>Order ID:</strong> <%= order.id %></p>
+    <p class="card-text"><strong>Name:</strong> <%= order.name %></p>
+    <p class="card-text"><strong>Address:</strong> <%= order.address %></p>
+    <p class="card-text"><strong>Email:</strong> <%= order.email %></p>
+    <p class="card-text"><strong>Pay Type:</strong> <%= order.pay_type %></p>
+    <p class="card-text"><strong>Order Status:</strong> <%= order.order_status.present? ? order.order_status.status.capitalize : 'No status available' %></p>
 
-    <p class="mb-2">
-      <strong>Address:</strong>
-      <%= order.address %>
-    </p>
+    <% if defined?(show_button) && show_button %>
+      <%= link_to "Show", order, class: "btn btn-primary btn-sm" %>
+    <% end %>
 
-    <p class="mb-2">
-      <strong>Email:</strong>
-      <%= order.email %>
-    </p>
-
-    <p class="mb-2">
-      <strong>Pay Type:</strong>
-      <%= order.pay_type %>
-    </p>
-
-    <p class="mb-2">
-      <strong>Order Status:</strong>
-      <%= order.order_status.present? ? order.order_status.status.capitalize : 'No status available' %>
-    </p>
+    <% if defined?(edit_delete_buttons) && edit_delete_buttons %>
+      <%= link_to "Edit", edit_order_path(order), class: "btn btn-secondary btn-sm" %>
+      <%= link_to "Delete", order, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+    <% end %>
   </div>
 </div>

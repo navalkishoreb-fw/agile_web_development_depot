@@ -1,10 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @order %>
+<%= render partial: 'order', locals: { order: @order, edit_delete_buttons: true } %>
 
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
-
-  <%= button_to "Destroy this order", @order, method: :delete %>
+<div class="mt-3">
+  <%= link_to "Back to Orders", orders_path, class: "btn btn-primary" %>
 </div>
