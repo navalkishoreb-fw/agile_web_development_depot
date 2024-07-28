@@ -21,7 +21,8 @@ class Order < ApplicationRecord
   end
 
   private def set_initial_status
-   create_order_status(status: 'received')
+    logger.info("after_create: set_initial_status : create_order_status #{id}")
+    create_order_status(status: 'received')
   end
 
   def check_order_status_presence

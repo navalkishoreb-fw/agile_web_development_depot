@@ -1,12 +1,50 @@
-<h3>Pragmatic Order Shipped</h3>
-<p>
-  This is just to let you know that we've shipped your recent order:
-</p>
-
-<table>
-  <tr>
-    <th colspan="2">Qty</th>
-    <th>Description</th>
-  </tr>
-  <%= render @order.line_items -%>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Order Shipped</title>
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h3>Your Order from The Pragmatic Store Has Shipped!</h3>
+    </div>
+    <div class="card-body">
+      <p>
+        Dear <%= @order.name %>,
+      </p>
+      <p>
+        We are excited to inform you that your recent order (ID: <%= @order.id %>) has been shipped and is on its way to you!
+      </p>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @order.line_items %>
+        </tbody>
+      </table>
+      <p>
+        You can expect your order to arrive soon. We hope you enjoy your purchase!
+      </p>
+      <p>
+        If you have any questions or need further assistance, please do not hesitate to contact our customer service team at <a href="mailto:support@pragmaticstore.com">support@pragmaticstore.com</a>.
+      </p>
+      <p>
+        Thank you for shopping with us.
+      </p>
+      <p>
+        Best regards,<br>
+        The Pragmatic Store Team
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

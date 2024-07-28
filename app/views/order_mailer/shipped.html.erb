@@ -1,12 +1,84 @@
-<h3>Pragmatic Order Shipped</h3>
-<p>
-  This is just to let you know that we've shipped your recent order:
-</p>
-
-<table>
-  <tr>
-    <th colspan="2">Qty</th>
-    <th>Description</th>
-  </tr>
-  <%= render @order.line_items -%>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Shipped</title>
+  <style>
+      .container {
+          margin-top: 20px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 20px;
+          border: 1px solid #e3e3e3;
+          border-radius: 5px;
+          background-color: #ffffff;
+      }
+      .card {
+          border: 1px solid #e3e3e3;
+          border-radius: 5px;
+      }
+      .card-header {
+          background-color: #007bff;
+          color: #ffffff;
+          padding: 10px;
+          border-bottom: 1px solid #e3e3e3;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+      }
+      .card-body {
+          padding: 20px;
+      }
+      .table {
+          width: 100%;
+          margin-bottom: 1rem;
+          color: #212529;
+          border-collapse: collapse;
+      }
+      .table th, .table td {
+          padding: 0.75rem;
+          vertical-align: top;
+          border-top: 1px solid #e3e3e3;
+      }
+      .table thead th {
+          vertical-align: bottom;
+          border-bottom: 2px solid #e3e3e3;
+      }
+      .table tbody + tbody {
+          border-top: 2px solid #e3e3e3;
+      }
+      .table-striped tbody tr:nth-of-type(odd) {
+          background-color: rgba(0, 0, 0, 0.05);
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Your Order from The Pragmatic Store Has Shipped!</h3>
+    </div>
+    <div class="card-body">
+      <p>Dear <%= @order.name %>,</p>
+      <p>We are excited to inform you that your recent order (ID: <%= @order.id %>) has been shipped and is on its way to you!</p>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @order.line_items %>
+        </tbody>
+      </table>
+      <p>You can expect your order to arrive soon. We hope you enjoy your purchase!</p>
+      <p>If you have any questions or need further assistance, please do not hesitate to contact our customer service team at <a href="mailto:support@pragmaticstore.com">support@pragmaticstore.com</a>.</p>
+      <p>Thank you for shopping with us.</p>
+      <p>Best regards,<br>The Pragmatic Store Team</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

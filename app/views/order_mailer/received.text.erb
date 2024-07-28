@@ -1,5 +1,85 @@
-Dear <%= @order.name %>
-Thank you for your recent order from The Pragmatic Store.
-You ordered the following items:
-<%= render @order.line_items -%>
-We'll send you a separate e-mail when your order ships.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation</title>
+  <style>
+      .container {
+          margin-top: 20px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 20px;
+          border: 1px solid #e3e3e3;
+          border-radius: 5px;
+          background-color: #ffffff;
+      }
+      .card {
+          border: 1px solid #e3e3e3;
+          border-radius: 5px;
+      }
+      .card-header {
+          background-color: #007bff;
+          color: #ffffff;
+          padding: 10px;
+          border-bottom: 1px solid #e3e3e3;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+      }
+      .card-body {
+          padding: 20px;
+      }
+      .table {
+          width: 100%;
+          margin-bottom: 1rem;
+          color: #212529;
+          border-collapse: collapse;
+      }
+      .table th, .table td {
+          padding: 0.75rem;
+          vertical-align: top;
+          border-top: 1px solid #e3e3e3;
+      }
+      .table thead th {
+          vertical-align: bottom;
+          border-bottom: 2px solid #e3e3e3;
+      }
+      .table tbody + tbody {
+          border-top: 2px solid #e3e3e3;
+      }
+      .table-striped tbody tr:nth-of-type(odd) {
+          background-color: rgba(0, 0, 0, 0.05);
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3>Order Confirmation from The Pragmatic Store</h3>
+    </div>
+    <div class="card-body">
+      <p>Dear <%= @order.name %>,</p>
+      <p>Thank you for your recent purchase from The Pragmatic Store!</p>
+      <p>We are pleased to confirm your order (ID: <%= @order.id %>) and provide the details of the items you have selected:</p>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Qty</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render @order.line_items %>
+        </tbody>
+      </table>
+      <p>We appreciate your business and are committed to providing you with the best service. You will receive a separate email with the tracking information once your order has shipped.</p>
+      <p>If you have any questions or need further assistance, please do not hesitate to contact our customer service team at <a href="mailto:support@pragmaticstore.com">support@pragmaticstore.com</a>.</p>
+      <p>Thank you for choosing The Pragmatic Store. We hope you enjoy your purchase!</p>
+      <p>Best regards,<br>The Pragmatic Store Team</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
