@@ -1,17 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Orders</h1>
+<div class="col-md-4">
+  <%= link_to "New order", new_order_path, class: "btn btn-success" %>
+</div>
 
 <div id="orders" class="container">
   <div class="row">
-    <%cache @orders.each do |order| %>
+    <% @orders.each do |order| %>
       <div class="col-md-4">
-        <%= render partial: 'order', locals: { order: order, show_button: true } %>
+        <%= render partial: order, locals: { order: order, show_button: true } %>
       </div>
     <% end %>
   </div>
 </div>
 
-<div class="mt-3">
-  <%= link_to "New order", new_order_path, class: "btn btn-success" %>
-</div>

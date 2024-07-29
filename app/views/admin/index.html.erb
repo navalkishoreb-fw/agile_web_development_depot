@@ -1,5 +1,9 @@
-<h1>Welcome</h1>
-<p>
-  It's <%= Time.now %>.
-  We have <%= pluralize(@total_orders, "order") %>.
-</p>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Welcome</h1>
+  <p class="text-center">
+    It's <strong><%= Time.now.strftime("%B %d, %Y %I:%M %p") %></strong>.
+  </p>
+  <p class="text-center">
+    We have <strong><%= pluralize(@total_orders, "order") %></strong>.
+  </p>
+</div>

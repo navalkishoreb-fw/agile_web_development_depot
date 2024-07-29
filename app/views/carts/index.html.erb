@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<% if notice %>
+  <div class="alert alert-success" role="alert"><%= notice %></div>
+<% end %>
 
-<h1>Carts</h1>
+<h1 class="text-center mb-4">Carts</h1>
 
-<div id="carts">
+<div id="carts" class="list-group">
   <% @carts.each do |cart| %>
-    <%= render cart %>
-    <p>
-      <%= link_to "Show this cart", cart %>
-    </p>
+    <div class="list-group-item">
+      <%= render cart %>
+      <p class="mt-2">
+        <%= link_to "Show this cart", cart, class: "btn btn-link" %>
+      </p>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New cart", new_cart_path %>
+<div class="text-center mt-4">
+  <%= link_to "New cart", new_cart_path, class: "btn btn-primary" %>
+</div>

@@ -1,7 +1,12 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render partial: 'order', locals: { order: @order, edit_delete_buttons: true } %>
 
-<div class="mt-3">
-  <%= link_to "Back to Orders", orders_path, class: "btn btn-primary" %>
+<div id="orders" class="container">
+  <div class="row">
+    <%= render partial: 'order', locals: { order: @order, edit_delete_buttons: true } %>
+
+    <div class="mt-3">
+      <%= link_to "Back to Orders", orders_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 </div>

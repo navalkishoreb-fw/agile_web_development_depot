@@ -1,22 +1,35 @@
-<section class="depot_form">
+<section class="depot_form container mt-5">
   <% if flash[:alert] %>
-    <aside class="notice"><%= flash[:alert] %></aside>
+    <aside class="alert alert-danger"><%= flash[:alert] %></aside>
   <% end %>
 
-  <%= form_tag do %>
-    <h2>Please Log In</h2>
-    <div class="field">
-      <%= label_tag :name, 'Name:' %>
-      <%= text_field_tag :name, params[:name] %>
-    </div>
+  <div class="card w-50 mx-auto mt-5">
+    <div class="card-body">
+      <h2 class="text-center mb-4">Please Log In</h2>
 
-    <div class="field">
-      <%= label_tag :password, 'Password:' %>
-      <%= password_field_tag :password, params[:password] %>
-    </div>
+      <%= form_tag do %>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <%= label_tag :name, 'Name:', class: 'form-label' %>
+          </div>
+          <div class="col-md-8">
+            <%= text_field_tag :name, params[:name], class: 'form-control', placeholder: 'Enter your name' %>
+          </div>
+        </div>
 
-    <div class="actions">
-      <%= submit_tag "Login" %>
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <%= label_tag :password, 'Password:', class: 'form-label' %>
+          </div>
+          <div class="col-md-8">
+            <%= password_field_tag :password, params[:password], class: 'form-control', placeholder: 'Enter your password' %>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <%= submit_tag "Login", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </section>

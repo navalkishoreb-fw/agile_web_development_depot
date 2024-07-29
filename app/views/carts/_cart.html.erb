@@ -1,28 +1,36 @@
-<article>
+<article class="container mt-4">
   <% if notice %>
-    <aside id="notice"><%= notice %></aside>
+    <aside id="notice" class="alert alert-info"><%= notice %></aside>
   <% end %>
 
-  <h2><%= t('.title') %></h2>
-  <table>
-
-    <%= render(cart.line_items) %>
-    <tfoot>
+  <h2 class="text-center mb-4"><%= t('.title') %></h2>
+  <table class="table table-striped">
+    <thead>
     <tr>
-      <th colspan="2">Total:</th>
-      <td class="price"><%= number_to_currency(cart.total_price) %></td>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th class="text-end">Price</th>
     </tr>
-    </tfoot>
+    </thead>
+    <tbody>
+    <% @cart.line_items.each do |line_item| %>
+      <tr class="<%= line_item == @current_item ? 'table-primary' : '' %>">
+        <td class="quantity text-center"><%= line_item.quantity %></td>
+        <td><%= line_item.product.title %></td>
+        <td class="price text-end"><%= number_to_currency(line_item.total_price) %></td>
+      </tr>
+    <% end %>
+    </tbody>
   </table>
 
-  <div class="actions">
+  <div class="d-flex justify-content-between mt-4">
     <%= button_to t('.empty'), cart,
                   method: :delete,
-                  data: { confirm: 'Are you sure?' } %>
-
+                  data: { confirm: 'Are you sure?' },
+                  class: "btn btn-danger" %>
 
     <%= button_to t('.checkout'), new_order_path,
                   method: :get,
-                  class: "checkout"%>
+                  class: "btn btn-primary" %>
   </div>
 </article>

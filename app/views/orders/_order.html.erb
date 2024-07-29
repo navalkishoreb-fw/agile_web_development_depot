@@ -1,4 +1,4 @@
-<div id="<%= dom_id(order) %>" class="card mb-3">
+<div id='<%= "order_#{order.id}" %>' class="card mb-3">
   <div class="card-body">
     <p class="card-title"><strong>Order ID:</strong> <%= order.id %></p>
     <p class="card-text"><strong>Name:</strong> <%= order.name %></p>
@@ -13,7 +13,7 @@
 
     <% if defined?(edit_delete_buttons) && edit_delete_buttons %>
       <%= link_to "Edit", edit_order_path(order), class: "btn btn-secondary btn-sm" %>
-      <%= link_to "Delete", order, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+      <%= button_to "Delete", order, method: :delete, class: "btn btn-danger btn-sm" %>
     <% end %>
   </div>
 </div>
