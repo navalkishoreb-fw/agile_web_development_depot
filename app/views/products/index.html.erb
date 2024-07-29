@@ -1,46 +1,45 @@
 <% if notice %>
-  <aside id="notice"><%= notice %></aside>
+  <aside id="notice" class="alert alert-success"><%= notice %></aside>
 <% end %>
 
-<h1>Products</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Products</h1>
+  <%= link_to 'New Product', new_product_path, class: 'btn btn-lg btn-primary' %>
+</div>
 
-<table>
-  <tfoot>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th class="image">Image</th>
+    <th class="description">Description</th>
+    <th class="actions">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
     <tr>
-      <td colspan="3">
-        <%= link_to 'New product', new_product_path %>
+      <td class="image">
+        <%= image_tag(product.image_url, class: 'list_image img-fluid', alt: product.title) %>
+      </td>
+      <td class="description">
+        <h5><%= product.title %></h5>
+        <p>
+          <%= truncate(strip_tags(product.description), length: 80) %>
+        </p>
+      </td>
+      <td class="actions">
+        <ul class="list-unstyled">
+          <li><%= link_to 'Show', product, class: 'btn btn-info' %></li>
+          <li><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-warning' %></li>
+          <li>
+            <%= link_to 'Destroy', product,
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' },
+                        class: 'btn btn-danger' %>
+          </li>
+        </ul>
       </td>
     </tr>
-  </tfoot>
-  <tbody>
-    <% @products.each do |product| %>
-      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-        <td class="image">
-          <%= image_tag(product.image_url, class: 'list_image') %>
-        </td>
-
-        <td class="description">
-          <h1><%= product.title %></h1>
-          <p>
-            <%= truncate(strip_tags(product.description),
-                         length: 80) %>
-          </p>
-        </td>
-
-        <td class="actions">
-          <ul>
-            <li><%= link_to 'Show', product %></li>
-            <li><%= link_to 'Edit', edit_product_path(product) %></li>
-            <li>
-              <%= link_to 'Destroy',
-                           product, 
-                          method: :delete,
-                          data: { confirm: 'Are you sure?' } %>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
-
