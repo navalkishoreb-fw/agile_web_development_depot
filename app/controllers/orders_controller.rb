@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = Order.order(updated_at: :desc)
   end
 
   # GET /orders/1 or /orders/1.json
