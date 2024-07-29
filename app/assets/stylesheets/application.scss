@@ -18,21 +18,21 @@
 
 @import "bootstrap";
 
-body {
-  margin: 0;
-  padding: 0;
-}
-header.main {
-  text-align: center; // center on mobile
-  @media (min-width: 30em) {
-    text-align: left; // left align on desktop
-  }
-  background: #282;
-  margin: 0;
-  h1 {
-    display: none;
-  }
-}
+//body {
+//  margin: 0;
+//  padding: 0;
+//}
+//header.main {
+//  text-align: center; // center on mobile
+//  @media (min-width: 30em) {
+//    text-align: left; // left align on desktop
+//  }
+//  background: #282;
+//  margin: 0;
+//  h1 {
+//    display: none;
+//  }
+//}
 
 .notice, #notice {
   background: #ffb;
@@ -218,4 +218,26 @@ header.main {
 .locale {
   float: right;
   margin: 1em;
+}
+
+.card-horizontal {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.card-img-left {
+  width: 147px;  /* Fixed width for the image */
+  height: 176px; /* Fixed height for the image */
+  object-fit: cover;
+  margin-right: 20px;  /* Space between image and card body */
+}
+
+.card-body {
+  flex: 1;
+}
+
+.custom-header {
+  background: #282;
+  color: white; /* Optional: Change text color for better contrast */
 }

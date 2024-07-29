@@ -4,7 +4,7 @@
 
 <div id="orders" class="container">
   <div class="row">
-    <% @orders.each do |order| %>
+    <%cache @orders.each do |order| %>
       <div class="col-md-4">
         <%= render partial: 'order', locals: { order: order, show_button: true } %>
       </div>

@@ -4,55 +4,54 @@
   <title>Pragprog Books Online Store</title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag 'application', media: 'all',
-                          'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application',
-                             'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
-<header class="main">
-
-<!--  <aside>
-    <%#= form_tag store_index_path, class: 'locale' do %>
-      <%= select_tag 'set_locale',
-                     options_for_select(LANGUAGES, I18n.locale.to_s),
-                     onchange: 'this.form.submit()' %>
-      <%#= submit_tag 'submit', id: "submit_locale_change" %>
-    <%# end %>
-  </aside>-->
-  <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
-  <h1><%= @page_title %></h1>
+<header class="main container-fluid custom-header p-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf', class: 'img-fluid' %>
+    <h1 class="h3"><%= @page_title %></h1>
+  </div>
 </header>
-<section class="content">
-  <nav class="side_nav">
-    <% if @cart %>
-      <div id="cart" class="carts">
-        <%= render_if @cart && @cart.line_items.any?, @cart %>
-      </div>
-    <% end %>
-    <ul>
-      <li><a href="/"><%= t('.home') %></a></li>
-      <li><a href="/questions"><%= t('.questions') %></a></li>
-      <li><a href="/news"><%= t('.news') %></a></li>
-      <li><a href="/contact"><%= t('.contact') %></a></li>
-    </ul>
 
-    <% if session[:user_id] %>
-      <nav class="logged_in_nav">
-        <ul>
-          <li><%= link_to 'Orders', orders_path %></li>
-          <li><%= link_to 'Products', products_path %></li>
-          <li><%= link_to 'Users', users_path %></li>
-          <li><%= button_to 'Logout', logout_path, method: :delete %></li>
-        </ul>
-      </nav>
-    <% end %>
+<section class="content container-fluid mt-0">
+  <div class="row">
+    <nav class="col-md-3">
+      <% if @cart %>
+        <div id="cart" class="carts mb-4">
+          <%= render_if @cart && @cart.line_items.any?, @cart %>
+        </div>
+      <% end %>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a href="/" class="nav-link"><%= t('.home') %></a></li>
+        <li class="nav-item"><a href="/questions" class="nav-link"><%= t('.questions') %></a></li>
+        <li class="nav-item"><a href="/news" class="nav-link"><%= t('.news') %></a></li>
+        <li class="nav-item"><a href="/contact" class="nav-link"><%= t('.contact') %></a></li>
+      </ul>
 
-  </nav>
-  <main class='<%= controller.controller_name %>'>
-    <%= yield %>
-  </main>
+      <% if session[:user_id] %>
+        <nav class="logged_in_nav mt-4">
+          <ul class="nav flex-column">
+            <li class="nav-item"><%= link_to 'Orders', orders_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Products', products_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+            <li class="nav-item"><%= button_to 'Logout', logout_path, method: :delete, class: 'nav-link btn btn-link' %></li>
+          </ul>
+        </nav>
+      <% end %>
+    </nav>
+
+    <main class="col-md-9 <%= controller.controller_name %>">
+      <%= yield %>
+    </main>
+  </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
